@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import sys
 import cgi
 import copy
+import html
 
 #your_template = open("html_form_data.html", 'r').read()
 #form = form_keeper(your_template)
@@ -20,7 +21,7 @@ class form_keeper():
 			field = soup.find("", {"name" : key})
 			if field.name == "input":
 				if field.type == "text" or "number" or "email" or "color" or "month" or "range" or "tel" or "url" or "week" or "date" or "datetime-local":
-					field['value'] = value
+					field['value'] = html.escape(value, quote=True) # security
 				else:
 					if field.type == "checkbox" or "radio":
 						field["checked"] = "True"
