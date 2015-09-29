@@ -21,7 +21,7 @@ class form_keeper():
 			field = soup.find("", {"name" : key})
 			if field.name == "input":
 				if field.type == "text" or "number" or "email" or "color" or "month" or "range" or "tel" or "url" or "week" or "date" or "datetime-local":
-					field['value'] = html.escape(value, quote=True) # security
+					field['value'] = html.escape(value, quote=True) # security - remove if your template engine escapes html automatically (such as Bottle, Django should too)
 				else:
 					if field.type == "checkbox" or "radio":
 						field["checked"] = "True"
